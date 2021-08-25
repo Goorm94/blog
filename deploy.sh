@@ -24,6 +24,6 @@ git commit -m 'deploy with vuepress'
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:nywwwww/blog.git master:gh-pages
+git push -f git@github.com:goorm94/blog.git master:gh-pages
 
 cd -

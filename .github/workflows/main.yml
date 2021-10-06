@@ -15,7 +15,7 @@ jobs:
     - name: Install and Build
       run: |
         npm install
-        npm run docs::build
+        npm run vuepress build docs
         
     - name: Deploy Build Files
       env:

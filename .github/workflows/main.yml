@@ -14,14 +14,15 @@ jobs:
 
     - name: Install and Build
       run: |
-        npm vuepress build docs
-        cd docs/.vuepress/dist
+        npm install
+        npm run docs::build
         
     - name: Deploy Build Files
       env:
         # You should enroll ACEESS_TOKEN to repository's secret
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }} 
       run: |
+        cd docs/.vuepress/dist
         git config --global user.email "wkhham@naver.com"
         git config --global user.name "goorm94"
         git init

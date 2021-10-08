@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>React heap out of memory 이슈 | 강해지고 싶은 개발자</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="🚀 개발과 기술의 발자취 🚀">
+    
+    <link rel="preload" href="/blog/assets/css/0.styles.bbe4b17c.css" as="style"><link rel="preload" href="/blog/assets/js/app.6a063b68.js" as="script"><link rel="preload" href="/blog/assets/js/2.344f0399.js" as="script"><link rel="preload" href="/blog/assets/js/26.65d7c431.js" as="script"><link rel="prefetch" href="/blog/assets/js/10.19d23687.js"><link rel="prefetch" href="/blog/assets/js/11.e84cc11f.js"><link rel="prefetch" href="/blog/assets/js/12.807d144f.js"><link rel="prefetch" href="/blog/assets/js/13.b39d025b.js"><link rel="prefetch" href="/blog/assets/js/14.994afe1a.js"><link rel="prefetch" href="/blog/assets/js/15.79a8a10d.js"><link rel="prefetch" href="/blog/assets/js/16.80471c2e.js"><link rel="prefetch" href="/blog/assets/js/17.f72a6071.js"><link rel="prefetch" href="/blog/assets/js/18.aca6dfdd.js"><link rel="prefetch" href="/blog/assets/js/19.d234a366.js"><link rel="prefetch" href="/blog/assets/js/20.2de22c9d.js"><link rel="prefetch" href="/blog/assets/js/21.8b6ebe8a.js"><link rel="prefetch" href="/blog/assets/js/22.24110fec.js"><link rel="prefetch" href="/blog/assets/js/23.eaaae781.js"><link rel="prefetch" href="/blog/assets/js/24.f9edbaf7.js"><link rel="prefetch" href="/blog/assets/js/25.407af36f.js"><link rel="prefetch" href="/blog/assets/js/27.955a97fb.js"><link rel="prefetch" href="/blog/assets/js/28.d6f63cd9.js"><link rel="prefetch" href="/blog/assets/js/29.62964f4d.js"><link rel="prefetch" href="/blog/assets/js/3.d0f99d74.js"><link rel="prefetch" href="/blog/assets/js/30.32d067f7.js"><link rel="prefetch" href="/blog/assets/js/31.4a3f1d2a.js"><link rel="prefetch" href="/blog/assets/js/32.3c3a0531.js"><link rel="prefetch" href="/blog/assets/js/33.7f51ebef.js"><link rel="prefetch" href="/blog/assets/js/34.1969edba.js"><link rel="prefetch" href="/blog/assets/js/35.bfe3663c.js"><link rel="prefetch" href="/blog/assets/js/36.5db2b1e9.js"><link rel="prefetch" href="/blog/assets/js/37.f11cd328.js"><link rel="prefetch" href="/blog/assets/js/4.b5c5d85a.js"><link rel="prefetch" href="/blog/assets/js/5.aedbb9bc.js"><link rel="prefetch" href="/blog/assets/js/6.7dd3e1f3.js"><link rel="prefetch" href="/blog/assets/js/7.82263de4.js"><link rel="prefetch" href="/blog/assets/js/8.f4df4e14.js"><link rel="prefetch" href="/blog/assets/js/9.5a7f81fb.js">
+    <link rel="stylesheet" href="/blog/assets/css/0.styles.bbe4b17c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/blog/" class="home-link router-link-active"><img src="/blog/img/logo.jpg" alt="강해지고 싶은 개발자" class="logo"> <span class="site-name can-hide">강해지고 싶은 개발자</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/blog/Home/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Dev" class="dropdown-title"><span class="title">Dev</span> <span class="arrow down"></span></button> <button type="button" aria-label="Dev" class="mobile-dropdown-title"><span class="title">Dev</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Front-end
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/blog/React/" class="nav-link router-link-active">
+  React
+</a></li><li class="dropdown-subitem"><a href="/blog/JS/" class="nav-link">
+  JS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Back-end
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/blog/Spring/" class="nav-link">
+  Spring
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/blog/Infra/" class="nav-link">
+  Infra
+</a></div><div class="nav-item"><a href="/blog/CS/" class="nav-link">
+  CS
+</a></div><div class="nav-item"><a href="/blog/dev-report/" class="nav-link">
+  개발일기
+</a></div><div class="nav-item"><a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/blog/Home/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Dev" class="dropdown-title"><span class="title">Dev</span> <span class="arrow down"></span></button> <button type="button" aria-label="Dev" class="mobile-dropdown-title"><span class="title">Dev</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><h4>
+          Front-end
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/blog/React/" class="nav-link router-link-active">
+  React
+</a></li><li class="dropdown-subitem"><a href="/blog/JS/" class="nav-link">
+  JS
+</a></li></ul></li><li class="dropdown-item"><h4>
+          Back-end
+        </h4> <ul class="dropdown-subitem-wrapper"><li class="dropdown-subitem"><a href="/blog/Spring/" class="nav-link">
+  Spring
+</a></li></ul></li></ul></div></div><div class="nav-item"><a href="/blog/Infra/" class="nav-link">
+  Infra
+</a></div><div class="nav-item"><a href="/blog/CS/" class="nav-link">
+  CS
+</a></div><div class="nav-item"><a href="/blog/dev-report/" class="nav-link">
+  개발일기
+</a></div><div class="nav-item"><a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/blog/React/" aria-current="page" class="sidebar-link">소개</a></li><li><a href="/blog/React/deeplink/" class="sidebar-link">React 역사</a></li><li><a href="/blog/React/mobx/" class="sidebar-link">Mobx</a></li><li><a href="/blog/React/optimize-performance/" class="sidebar-link">Optimize-performance</a></li><li><a href="/blog/React/react/" class="sidebar-link">React</a></li><li><a href="/blog/React/react-hook/" class="sidebar-link">Hooks</a></li><li><a href="/blog/React/react_heap_out_of_memory/" aria-current="page" class="active sidebar-link">React heap out of memory 이슈</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/blog/React/recoil/" class="sidebar-link">Recoil</a></li><li><a href="/blog/React/redux/" class="sidebar-link">Redux</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="react-heap-out-of-memory-이슈"><a href="#react-heap-out-of-memory-이슈" class="header-anchor">#</a> React heap out of memory 이슈</h1> <p>yarn build 명령 실행시 발생하는 메모리 불충분 이슈 입니다.</p> <div class="language- extra-class"><pre class="language-text"><code>FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+</code></pre></div><p>메모리 점유로 인해 JS엔진이 멈춰버린 것입니다.</p> <h3 id="_1-해결-방법"><a href="#_1-해결-방법" class="header-anchor">#</a> 1. 해결 방법</h3> <h4 id="_1-메모리-할당량-키우기"><a href="#_1-메모리-할당량-키우기" class="header-anchor">#</a> 1) 메모리 할당량 키우기</h4> <p>기본적으로 환경 변수 노드의 최대 힙 크기 증가를 통해 해결 할 수 있습니다.</p> <div class="language- extra-class"><pre class="language-text"><code>NODE_OPTIONS --max-old-space-size
+</code></pre></div><p>시스템에서 전역으로 환경 변수를 설정하면 Node가 환경에서 이 값을 읽을 수 있으므로 Node 명령을 실행할 때마다 이 값을 인수로 전달할 필요가 없게 됩니다.</p> <p>환경 변수를 설정하는 과정은 OS에 따라 다릅니다. 다음은 이에 대한 두 개의 SO 게시물입니다.</p> <ul><li><strong>Linux</strong> : <a href="https://stackoverflow.com/questions/234742/setting-environment-variables-in-linux-using-bash" target="_blank" rel="noopener noreferrer">Bash를 사용하여 Linux에서 환경 변수 설정<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li> <li><strong>Windows</strong> : <strong>Windows</strong> <a href="https://stackoverflow.com/questions/32463212/how-to-set-environment-variables-from-windows" target="_blank" rel="noopener noreferrer">에서 환경 변수를 설정하는 방법<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <h4 id=""><a href="#" class="header-anchor">#</a></h4> <p>하지만,  메모리의 크기를 빌드시 마다 바꾸는 것도 매력적으로 다가 올 수 있습니다.  그래서 어플리케이션 빌드 명령어에 옵션을 추가하는 방법도 존재합니다.</p> <p>React 앱을 기준으로 설명드리겠습니다.</p> <p>package.json 파일내 scripts 를 정의하는 부분에 다음과 같이 옵션을 추가 할 수 있습니다.</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token string">&quot;scripts&quot;</span><span class="token operator">:</span> 
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;start&quot;</span><span class="token operator">:</span> <span class="token string">&quot;cross-env NODE_OPTIONS=--max-old-space-size=4096 webpack&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>힙메모리 설정 명령어 앞에보이는 cross-env 명령어는 라이브러리 입니다.</p> <p>크로스 플랫폼에서 환경변수를 설정할때 사용하는 라이브러리 인데요, 프로젝트에 Windows, Linux 등 다양한 OS를 사용하고 있다면 OS마다 설정하는 방법이 다르기 때문에 nodejs 에서는 이를 해결하기 위해 다음과 같은 라이브러리 사용을 추천합니다.</p> <p>현재 Production pakage.json의 경우</p> <div class="language-react extra-class"><pre class="language-text"><code>  &quot;scripts&quot;: {
+    &quot;build&quot;: &quot;set \&quot;GENERATE_SOURCEMAP=false\&quot; &amp;&amp; cross-env NODE_OPTIONS=--max-old-space-size=4096 NODE_PATH=src node scripts/build.js&quot;,
+  },
+</code></pre></div><p>build 스크립트를 다음과 같이 설정 하였습니다.</p> <p>여기에서 GENERATE_SOURCEMAP=false 는  create-react-app으로 React 프로젝트를 빌드하여 배포하는 경우, 기본적으로 webpack에 의해 번들링 된 파일과 해당 파일에 대응되는 sourcemap이 생성됩니다.</p> <p>이러한 sourcemap은 디버깅을 위한 파일이기 때문에 production 과 같이 실제 배포시에는 제거되어야 하며, 빌드 시 메모리 부족 이슈를 해결하는데 도움을 줍니다.</p> <h4 id="aws-code-build-에서-다음과-같은-오류가-발생한-경우에는-코드-빌더의-컴퓨팅을-향상-시켜야-위와-같은-옵션-설정이-가능합니다"><a href="#aws-code-build-에서-다음과-같은-오류가-발생한-경우에는-코드-빌더의-컴퓨팅을-향상-시켜야-위와-같은-옵션-설정이-가능합니다" class="header-anchor">#</a> AWS(Code Build) 에서 다음과 같은 오류가 발생한 경우에는 코드 빌더의 컴퓨팅을 향상 시켜야 위와 같은 옵션 설정이 가능합니다.</h4> <p>개발자 도구 -&gt; CodeBuild -&gt; 프로젝트 빌드 -&gt; 편집 -&gt; 환경 -&gt; 추가 구성</p> <p><img src="C:%5CUsers%5Cwoonkyoung_ham1%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210803211425327.png" alt="image-20210803211425327"></p> <div class="language- extra-class"><pre class="language-text"><code>codebuild.amazonaws.com did not create the default version (v2) of the that is attached to the role. To continue, detach the policy from any other identities and then delete the policy and the role.
+</code></pre></div><p>위와 같은 오류가 발생한 경우에는 정책 버전을 재 지정 해주어야 합니다.</p> <p>IAM -&gt; 역할 -&gt; CodeBuild에서 사용중인 역할을 찾아 선택 -&gt;  권한에 연결되어있는 정책 중 오류를 유발하는 정책을 클릭  -&gt;  정책 버전 -&gt; Version 1 을 기본값으로 설정</p> <p>이후 다시 빌드 컴퓨팅 환경을 업그레이드 합니다</p> <h4 id="🔥컴퓨팅-환경-업그레이드-후-반드시-정책-버전을-다시-되돌려-주세요-🔥"><a href="#🔥컴퓨팅-환경-업그레이드-후-반드시-정책-버전을-다시-되돌려-주세요-🔥" class="header-anchor">#</a> 🔥컴퓨팅 환경 업그레이드 후 반드시 정책 버전을 다시 되돌려 주세요 !🔥</h4> <h4 id="_2-앱의-메모리-누수-개선"><a href="#_2-앱의-메모리-누수-개선" class="header-anchor">#</a> 2) 앱의 메모리 누수 개선</h4> <p>아직은 이부분은 저 역시 확실히 알지 못합니다.</p> <p>우선 메모리 누수를 확인하는 방법을 기술한 블로그의 내용을 빌리겠습니다.</p> <p>https://ajh322.tistory.com/243</p> <p>메모리 누수 개선의 경우는 시간을 두고 다시 고민하도록 하겠습니다.</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/blog/React/react-hook/" class="prev">
+        Hooks
+      </a></span> <span class="next"><a href="/blog/React/recoil/">
+        Recoil
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/blog/assets/js/app.6a063b68.js" defer></script><script src="/blog/assets/js/2.344f0399.js" defer></script><script src="/blog/assets/js/26.65d7c431.js" defer></script>
+  </body>
+</html>

@@ -7,8 +7,7 @@
 기본적으로 api timeout이 설정되어 있지 않습니다. 따라서, API를 호출하면 서버에서 응답을 주기 전까지는 계속 연결되어 있는 현상을 확인 할 수 있습니다. 간단한 설정을 통해 Axios에서 제공하는 Timeout을 설정하는 방법을 알아보도록 하겠습니다.
 
 
-
-## axios timeout
+# axios timeout
 
 axios를 생성하여 timeout을 옵션으로 추가하고 해당 인스턴스로 api를 호출하도록 작업을 진행합니다.
 
@@ -64,8 +63,6 @@ instance.get('/Request', {
 
 
 여러개의 방법이 각각 달라보이실 수도 있지만, 핵심은 Api  요청 Config에 Timeout 값을 추가해서 해당 시간이 지나면 Error를 발생시키는 로직이라고 생각하시면 편하실 것 같습니다. config 설정에 대해 알아 보실 분들은 [공식문서](https://axios-http.com/docs/intro)를 참고해주세요.
-
-### 
 
 #### Timeout 걸린 후에 처리
 
@@ -178,7 +175,7 @@ error 객체에 담긴 값을 개발자가 해석해서 다음 작업을 시도�
 
 
 
-## Retry - Interceptors 활용
+# Retry - Interceptors 활용
 
 axios 개발팀에서 기본적으로 권하는 방법이기도 하다. 실패시 인터셉터로 잡아채서 재시도 하는 방법이다.  위의 예제처럼 각 API 요청마다 매번 에러를 잡아서 핸들링 하는 방식은 생산성이 매우 떨어지기 때문에, 기본틀을 형성해 공통적인 에러 처리를 수행하고 config값을 통해 세부적인 컨트롤을 하는 방법이라고 할 수 있겠다.
 
@@ -209,7 +206,26 @@ axios.interceptor.response.use(onFulfilled, onRejected)
 ##### Interceptor의 사용
 
 ```javascript
-import Axios from 'axios'const axios = Axios.create()axios.interceptors.request.use(    (config) => {        console.log('Request: OnFulfilled')        return config    },     (error) => {        console.log('Request: OnRejected')        return Promise.reject(error)    })axios.interceptors.response.use(    (response) => {        console.log('Response: OnFulfilled')        return response    },     (error) => {        console.log('Response: OnRejected')        return Promise.reject(error)    })
+import Axios from 'axios'
+
+const axios = Axios.create()
+
+axios.interceptors.request.use(    (config) => { 
+    console.log('Request: OnFulfilled')  
+    return config 
+    }, (error) => { 
+    console.log('Request: OnRejected') 
+    return Promise.reject(error)
+})
+
+axios.interceptors.response.use(    (response) => {  
+    console.log('Response: OnFulfilled')  
+    return response 
+    },  (error) => {    
+    console.log('Response: OnRejected')  
+    return Promise.reject(error)  
+})
+
 ```
 
 위의 config 와 response가 `onFulfilled` 로 정상적인 요청 및 응답은 return 해주고, error 가 발생할 경우 Promise 객체를 반환하는 코드 입니다.
@@ -225,7 +241,20 @@ import Axios from 'axios'const axios = Axios.create()axios.interceptors.request.
 axios 요청은 Error 객체의 config에 저장되기 때문에 받은 그대로 다시 Request를 날려주기만 하면 됩니다.
 
 ```javascript
-axios.interceptors.response.use(    function (response) {        return response;    },    function (error) {        if(error.config.timeout){            console.log("timeout 발생...", error.config)            setTimeout(()=>{                return axios.request(config);            },5)        }        return Promise.reject(error);    });
+axios.interceptors.response.use(   
+    function (response) { 
+        return response;   
+    }, 
+        
+    function (error) {     
+      if(error.config.timeout){      
+        console.log("timeout 발생...", error.config)
+        setTimeout(()=>{           
+            return axios.request(config);
+       },5)      
+    }        
+    
+    return Promise.reject(error);    });
 ```
 
 
@@ -235,13 +264,37 @@ axios.interceptors.response.use(    function (response) {        return response
 아무래도 위의 코드대로라면 무한 에러를 낼 수 있기때문에 위험합니다. 재시도 횟수를 지정하는 방법을 알아 보겠습니다.
 
 ```javascript
-const axios =- require("axios");axios	.post("http://domain/post", { name: "ham"}, {timeout : 50, retry : 0})	.then(response => {		console.log(response.data);	})	.catch(error => {		console.log(error)	})
+const axios =- require("axios");
+
+axios.post("http://domain/post", { name: "ham"}, {timeout : 50, retry : 0})
+        .then(response => {		
+            console.log(response.data);
+        }).catch(error => {	
+            console.log(error)
+        })
 ```
 
 우리는 앞서 timeout 값을 config에 저장해 Api 요청을 시도 하였습니다. 이와같이 retry 값을 만들고 횟수를 제한 하면 되겠죠
 
 ```javascript
-axios.interceptors.response.use(    function (response) {        return response;    },        if(error.config.timeout && error.config.retry < 2){            console.log("retry...", error.config)            const config = {                ...error.config,                retry : error.config.retry+1            }            setTimeout(()=>{                return axios.request(config);            },5)        }        return Promise.reject(error););
+axios.interceptors.response.use( 
+    function (response){
+        return response;
+    }, 
+    (error: AxiosError) => {
+      if (error.config.timeout && error.config.retry < 2) {
+        console.log("retry...", error.config)
+        const config = {
+          ...error.config,
+          retry: error.config.retry + 1
+        }
+        setTimeout(() => {
+          return axios.request(config);
+        }, 5)
+
+        return Promise.reject(error);
+      }
+    });
 ```
 
 
